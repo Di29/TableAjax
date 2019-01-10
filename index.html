@@ -1,0 +1,73 @@
+<html>
+<head>
+  <title>TABLE</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      dt = $('#example').DataTable({
+        "ajax": 'data/'
+    });
+
+    $( "#add" ).click(function() {
+
+      name1=$( '#name1' ).val();
+      name2=$( '#name2' ).val();
+      name3=$( '#name3' ).val();
+      name4=$( '#name4' ).val();
+
+      $.ajax({
+        url: "/add_data",
+        type: 'POST',
+        data:{
+          name1: name1,
+          name2: name2,
+          name3: name3,
+          name4: name4
+        },
+        success: function(result){
+          //alert(result);
+          console.log(result);
+          dt.draw();
+      }});
+
+    });
+
+
+   });
+  </script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+  <body>
+    <table id="example" class="display" style="width:100%">
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Office</th>
+              <th>Age</th>
+              <th>Start date</th>
+              <th>Salary</th>
+          </tr>
+      </thead>
+      <tfoot>
+          <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Office</th>
+              <th>Age</th>
+              <th>Start date</th>
+              <th>Salary</th>
+          </tr>
+      </tfoot>
+  </table>
+
+  <br><br><br>
+  <input type="text" name="name1" id="name1" value="">
+  <input type="text" name="name2" id="name2" value="">
+  <input type="text" name="name3" id="name3" value="">
+  <input type="text" name="name4" id="name4" value="">
+  <button type="button" name="button" id="add">ADD</button>
+
+  </body>
+</html>
